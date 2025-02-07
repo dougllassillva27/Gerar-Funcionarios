@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "canvas": "^3.1.0",
+    "dotenv": "^16.4.7",
+    "node-fetch": "^2.7.0",
+    "readline": "^1.3.0",
+    "sharp": "^0.30.0",
+    "xlsx": "^0.18.5"
+  },
+  "name": "pw",
+  "version": "1.0.0",
+  "main": "inserirFuncionarios.js",
+  "bin": "inserirFuncionarios.js",
+  "scripts": {
+    "start": "node inserirFuncionarios.js",
+    "build": "pkg . --targets node16-win-x64 --output app.exe"
+  },
+  "pkg": {
+    "assets": [
+      ".env"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

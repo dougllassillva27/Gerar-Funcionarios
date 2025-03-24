@@ -1,5 +1,7 @@
 # Gerador de Funcionários Fictícios
 
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 Este projeto foi desenvolvido para gerar dados fictícios de funcionários e criar um arquivo Excel contendo essas informações. O código também gera imagens aleatórias associadas a cada funcionário e as salva em um diretório especificado.
 
 ## Funcionalidades

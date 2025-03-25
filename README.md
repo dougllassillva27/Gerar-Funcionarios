@@ -8,8 +8,8 @@ Este projeto foi desenvolvido para gerar dados fictícios de funcionários e cri
 
 - Geração de dados fictícios de funcionários, incluindo:
   - Nome, Identificador, Número de Folha, PIS, CPF, Empresa, Horário, Função, Departamento e Data de Admissão.
-- Geração de imagens aleatórias para cada funcionário, que são salvas em um diretório especificado.
-- Criação de um arquivo Excel com as informações dos funcionários.
+- Geração de imagens aleatórias para cada funcionário, que são salvas em um diretório especificado, ficando vinculado ao CPF de cada um como nome da imagem.
+- Criação de um arquivo Excel, PRN ou CSV com as informações dos funcionários.
 - Pergunta ao usuário os diretórios para salvar o arquivo Excel e as imagens, com valores padrão:
   - Excel: `C:\Arquivos`
   - Fotos: `C:\Arquivos\fotos`

@@ -25,7 +25,7 @@ const fs = require('fs');
 const xlsx = require('xlsx');
 const readline = require('readline');
 const path = require('path');
-const { createCanvas } = require('canvas');
+const { createCanvas } = require('@napi-rs/canvas');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -228,9 +228,33 @@ async function iniciar() {
       }
 
       console.log(`📸 Imagens salvas em: ${PASTA_IMAGENS}`);
+
+      // Fecha a interface readline atual
       rl.close();
+
+      // Chama a função para aguardar tecla
+      aguardarTeclaParaSair();
     });
   });
 }
 
+// Função para aguardar clique para sair do CMD
+function aguardarTeclaParaSair() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  console.log('\n✅ Arquivo de funcionários criado com êxito. Pressione qualquer tecla para fechar...');
+
+  // Configura o stdin para modo raw para capturar qualquer tecla
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+
+  process.stdin.once('data', () => {
+    process.stdin.setRawMode(false);
+    rl.close();
+    process.exit(0);
+  });
+}
 iniciar();

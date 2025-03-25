@@ -5,7 +5,7 @@
   "bin": "gerarFuncionarios.js",
   "scripts": {
     "start": "node gerarFuncionarios.js",
-    "build": "pkg . --targets node16-win-x64 --output gerarFuncionarios.exe"
+    "build": "pkg . --targets node18-win-x64 --output gerarFuncionarios.exe --icon assets/icon.ico"
   },
   "pkg": {
     "assets": [

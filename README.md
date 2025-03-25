@@ -2,7 +2,7 @@
 
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Este projeto foi desenvolvido para gerar dados fictícios de funcionários e criar um arquivo Excel contendo essas informações. O código também gera imagens aleatórias associadas a cada funcionário e as salva em um diretório especificado.
+Este projeto foi desenvolvido para gerar dados fictícios de funcionários e criar um arquivo Excel ou PRN contendo essas informações. O código também gera imagens aleatórias associadas a cada funcionário e as salva em um diretório especificado.
 
 ## Funcionalidades
 
@@ -14,6 +14,8 @@ Este projeto foi desenvolvido para gerar dados fictícios de funcionários e cri
   - Excel: `C:\Arquivos`
   - Fotos: `C:\Arquivos\fotos`
 - Caso as pastas não existam, elas são criadas automaticamente.
+- Pergunta a quantidade de funcionários deseja gerar.
+- Pergunta qual formato quer gerar o arquivo (Excel, PRN, CSV)
 
 ## Requisitos
 

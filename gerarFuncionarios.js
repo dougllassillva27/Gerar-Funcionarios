@@ -43,7 +43,7 @@ function perguntarCaminho(prompt, defaultPath) {
 
 // Perguntar ao usuário as pastas para salvar
 async function obterDiretorios() {
-  const PASTA_SAIDA = await perguntarCaminho('Digite o caminho para salvar o arquivo Excel', 'C:\\Arquivos');
+  const PASTA_SAIDA = await perguntarCaminho('Digite o caminho para salvar os arquivos', 'C:\\Arquivos');
   const PASTA_IMAGENS = await perguntarCaminho('Digite o caminho para salvar as fotos', 'C:\\Arquivos\\fotos');
 
   // Verifica se os diretórios existem, se não, cria
@@ -124,7 +124,7 @@ function gerarFuncionarios(quantidade, PASTA_IMAGENS) {
 
   for (let i = 1; i <= quantidade; i++) {
     let cpf = gerarCPF();
-    let caminhoImagem = gerarImagemFuncionario(cpf, PASTA_IMAGENS); // Gera imagem do funcionário
+    let caminhoImagem = gerarImagemFuncionario(cpf, PASTA_IMAGENS);
 
     funcionarios.push({
       Nome: `Funcionário API ${i}`,
@@ -137,7 +137,7 @@ function gerarFuncionarios(quantidade, PASTA_IMAGENS) {
       Função: FUNCOES[Math.floor(Math.random() * FUNCOES.length)],
       Departamento: DEPARTAMENTOS[Math.floor(Math.random() * DEPARTAMENTOS.length)],
       Admissão: gerarDataAdmissao(),
-      Estrutura: '', // A coluna Estrutura será criada em branco
+      Estrutura: '',
     });
   }
 
@@ -152,18 +152,84 @@ function criarArquivoExcel(funcionarios, PASTA_SAIDA) {
 
   const caminhoArquivo = path.join(PASTA_SAIDA, 'funcionarios.xlsx');
   xlsx.writeFile(wb, caminhoArquivo);
-  console.log(`📂 Arquivo salvo em: ${caminhoArquivo}`);
+  console.log(`📂 Arquivo Excel salvo em: ${caminhoArquivo}`);
 }
 
-// Perguntar ao usuário quantos funcionários deseja criar
+// Cria um arquivo PRN (texto alinhado) na pasta especificada
+function criarArquivoPRN(funcionarios, PASTA_SAIDA) {
+  // Define os tamanhos de cada campo (ajuste conforme necessário)
+  const campos = [
+    { nome: 'Nome', tamanho: 50 },
+    { nome: 'Identificador', tamanho: 10 },
+    { nome: 'N_Folha', tamanho: 10 },
+    { nome: 'PIS', tamanho: 15 },
+    { nome: 'CPF', tamanho: 15 },
+    { nome: 'Empresa', tamanho: 20 },
+    { nome: 'Horário', tamanho: 10 },
+    { nome: 'Função', tamanho: 30 },
+    { nome: 'Departamento', tamanho: 30 },
+    { nome: 'Admissão', tamanho: 15 },
+    { nome: 'Estrutura', tamanho: 10 },
+  ];
+
+  // Cria o cabeçalho
+  let cabecalho = campos.map((campo) => campo.nome.padEnd(campo.tamanho).substring(0, campo.tamanho)).join('');
+
+  // Cria as linhas de dados
+  let linhas = funcionarios.map((func) => {
+    return campos
+      .map((campo) => {
+        let valor = String(func[campo.nome] || '');
+        return valor.padEnd(campo.tamanho).substring(0, campo.tamanho);
+      })
+      .join('');
+  });
+
+  // Junta tudo
+  let conteudo = [cabecalho, ...linhas].join('\r\n');
+
+  const caminhoArquivo = path.join(PASTA_SAIDA, 'funcionarios.prn');
+  fs.writeFileSync(caminhoArquivo, conteudo, 'utf8');
+  console.log(`📂 Arquivo PRN salvo em: ${caminhoArquivo}`);
+}
+
+// Cria um arquivo CSV na pasta especificada
+function criarArquivoCSV(funcionarios, PASTA_SAIDA) {
+  const cabecalho = Object.keys(funcionarios[0]).join(';');
+  const linhas = funcionarios.map((func) => Object.values(func).join(';'));
+  const conteudo = [cabecalho, ...linhas].join('\r\n');
+
+  const caminhoArquivo = path.join(PASTA_SAIDA, 'funcionarios.csv');
+  fs.writeFileSync(caminhoArquivo, conteudo, 'utf8');
+  console.log(`📂 Arquivo CSV salvo em: ${caminhoArquivo}`);
+}
+
+// Perguntar ao usuário quantos funcionários deseja criar e o formato
 async function iniciar() {
   const { PASTA_SAIDA, PASTA_IMAGENS } = await obterDiretorios();
 
   rl.question('Quantos funcionários deseja gerar? ', (quantidade) => {
-    const funcionarios = gerarFuncionarios(parseInt(quantidade), PASTA_IMAGENS);
-    criarArquivoExcel(funcionarios, PASTA_SAIDA);
-    console.log(`📸 Imagens salvas em: ${PASTA_IMAGENS}`);
-    rl.close();
+    rl.question('Escolha o formato (1 - Excel, 2 - PRN, 3 - CSV): ', (formato) => {
+      const funcionarios = gerarFuncionarios(parseInt(quantidade), PASTA_IMAGENS);
+
+      switch (formato) {
+        case '1':
+          criarArquivoExcel(funcionarios, PASTA_SAIDA);
+          break;
+        case '2':
+          criarArquivoPRN(funcionarios, PASTA_SAIDA);
+          break;
+        case '3':
+          criarArquivoCSV(funcionarios, PASTA_SAIDA);
+          break;
+        default:
+          console.log('Opção inválida. Gerando arquivo Excel por padrão.');
+          criarArquivoExcel(funcionarios, PASTA_SAIDA);
+      }
+
+      console.log(`📸 Imagens salvas em: ${PASTA_IMAGENS}`);
+      rl.close();
+    });
   });
 }
 

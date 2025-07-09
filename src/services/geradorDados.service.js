@@ -1,10 +1,15 @@
-const { faker } = require('@faker-js/faker');
-const { formatarCPF } = require('../utils/formatadores.js'); // Caminho Corrigido
-const { FUNCOES, DEPARTAMENTOS, CNPJ_EMPRESA } = require('../../config.js'); // Caminho Corrigido
+const { Faker, pt_BR } = require('@faker-js/faker');
+const { formatarCPF } = require('../utils/formatadores.js');
+const { FUNCOES, DEPARTAMENTOS, CNPJ_EMPRESA } = require('../../config.js');
+
+// Criamos uma instância do Faker configurada para o português do Brasil.
+const faker = new Faker({
+  locale: [pt_BR],
+});
 
 function gerar(quantidade) {
   const funcionarios = [];
-  faker.locale = 'pt_BR';
+  // A linha 'faker.locale = 'pt_BR';' foi removida daqui.
   for (let i = 0; i < quantidade; i++) {
     const cpfSemFormatacao = faker.string.numeric(11);
 

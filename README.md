@@ -2,8 +2,6 @@
 
 Uma aplicação de linha de comando (CLI) desenvolvida em **Node.js** para gerar massas de dados de funcionários fictícios. O projeto é altamente configurável, permitindo ao usuário definir a **quantidade de dados**, o **formato do arquivo de saída** e os **diretórios de salvamento**.
 
-> ✅ O grande diferencial é a capacidade de ser **compilado em um executável `.exe` independente**, funcionando em qualquer máquina Windows (64 bits) **sem precisar instalar o Node.js**.
-
 ---
 
 ## ✨ Funcionalidades Principais
@@ -30,16 +28,13 @@ Uma aplicação de linha de comando (CLI) desenvolvida em **Node.js** para gerar
   - Estrutura
 
 - **Avatares Personalizados**  
-  Baixa uma imagem de avatar única para cada funcionário, salvando como `<CPF>.jpg`.
+  Baixa uma imagem de avatar única para cada funcionário, salvando como `<CPF>.png`.
 
 - **Caminhos Customizáveis**  
   Permite definir onde os arquivos serão salvos (`C:\Arquivos` é o padrão).
 
 - **Criação Automática de Pastas**  
   Pastas de destino são criadas automaticamente se não existirem.
-
-- **Compilação para .exe**  
-  Processo automatizado para gerar executável standalone com **ícone personalizado**.
 
 ---
 

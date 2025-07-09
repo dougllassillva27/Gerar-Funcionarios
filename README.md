@@ -1,33 +1,115 @@
-# Gerador de Funcionários Fictícios
+# 📖 Gerador de Dados Fictícios
 
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+Uma aplicação de linha de comando (CLI) desenvolvida em **Node.js** para gerar massas de dados de funcionários fictícios. O projeto é altamente configurável, permitindo ao usuário definir a **quantidade de dados**, o **formato do arquivo de saída** e os **diretórios de salvamento**.
 
-Este projeto foi desenvolvido para gerar dados fictícios de funcionários e criar um arquivo Excel ou PRN contendo essas informações. O código também gera imagens aleatórias associadas a cada funcionário e as salva em um diretório especificado.
+> ✅ O grande diferencial é a capacidade de ser **compilado em um executável `.exe` independente**, funcionando em qualquer máquina Windows (64 bits) **sem precisar instalar o Node.js**.
 
-## Funcionalidades
+---
 
-- Geração de dados fictícios de funcionários, incluindo:
-  - Nome, Identificador, Número de Folha, PIS, CPF, Empresa, Horário, Função, Departamento e Data de Admissão.
-- Geração de imagens aleatórias para cada funcionário, que são salvas em um diretório especificado, ficando vinculado ao CPF de cada um como nome da imagem.
-- Criação de um arquivo Excel, PRN ou CSV com as informações dos funcionários.
-- Pergunta ao usuário os diretórios para salvar o arquivo Excel e as imagens, com valores padrão:
-  - Excel: `C:\Arquivos`
-  - Fotos: `C:\Arquivos\fotos`
-- Caso as pastas não existam, elas são criadas automaticamente.
-- Pergunta a quantidade de funcionários deseja gerar.
-- Pergunta qual formato quer gerar o arquivo (Excel, PRN, CSV)
+## ✨ Funcionalidades Principais
 
-## Requisitos
+- **Geração Interativa**  
+  O script guia o usuário por meio de perguntas no terminal.
 
-- Node.js v12 ou superior.
-- Pacotes npm: `fs`, `path`, `xlsx`, `readline`, `canvas`.
-- Acesso ao sistema de arquivos para criação e gravação de arquivos Excel e imagens.
+- **Múltiplos Formatos de Saída**  
+  Exportação para `.xlsx` (Excel), `.csv` e `.prn` (texto de largura fixa).
 
-## Instalação
+- **Dados Abrangentes**  
+  Gera os seguintes dados para cada funcionário:
 
-1. Clone o repositório ou baixe o código para sua máquina.
-2. Instale as dependências necessárias:
+  - Nome
+  - Identificador
+  - N_Folha
+  - PIS
+  - CPF
+  - Empresa
+  - Horário
+  - Função
+  - Departamento
+  - Admissão
+  - Estrutura
+
+- **Avatares Personalizados**  
+  Baixa uma imagem de avatar única para cada funcionário, salvando como `<CPF>.jpg`.
+
+- **Caminhos Customizáveis**  
+  Permite definir onde os arquivos serão salvos (`C:\Arquivos` é o padrão).
+
+- **Criação Automática de Pastas**  
+  Pastas de destino são criadas automaticamente se não existirem.
+
+- **Compilação para .exe**  
+  Processo automatizado para gerar executável standalone com **ícone personalizado**.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- **Node.js** — Ambiente de execução JavaScript
+- **@faker-js/faker** — Geração de dados fictícios
+- **Axios** — Cliente HTTP para download de avatares
+- **ExcelJS** — Criação de planilhas Excel
+- **pkg** — Empacotamento da aplicação em `.exe`
+- **rcedit** — Edição de recursos `.exe` (ícone, versão, etc.)
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```bash
+/gerador-funcionarios/
+│
+├── dist/                  # Executável gerado (.exe)
+├── assets/                # Ícone da aplicação (icon.ico)
+├── src/                   # Código-fonte principal
+│   ├── services/          # Lógica de geração e salvamento de dados
+│   ├── utils/             # Funções auxiliares (ex: formatadores)
+│   └── interface.js       # Interface CLI (perguntas ao usuário)
+│
+├── config.js              # Configurações globais
+├── index.js               # Ponto de entrada da aplicação
+├── package.json           # Scripts, dependências, metadata
+└── README.md              # Documentação do projeto
+```
+
+---
+
+## 🛠️ Pré-requisitos
+
+Para desenvolvimento ou personalização:
+
+- **Node.js** (v18 ou superior)
+- **npm** (vem com o Node.js)
+
+---
+
+## ⚙️ Instalação
+
+```bash
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
+
+# Acesse a pasta
+cd gerador-funcionarios
+
+# Instale as dependências
 npm install
 ```
+
+---
+
+## ▶️ Como Usar (Modo de Desenvolvimento)
+
+Execute o comando abaixo:
+
+```bash
+npm start
+```
+
+O programa será iniciado no terminal e fará perguntas para geração dos dados.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a **Licença MIT**. Consulte o arquivo `LICENSE` para mais detalhes.

@@ -1,38 +1,36 @@
 {
-  "name": "gerar-funcionarios",
-  "version": "1.0.0",
-  "main": "gerarFuncionarios.js",
-  "bin": "gerarFuncionarios.js",
-  "scripts": {
-    "start": "node gerarFuncionarios.js",
-    "build": "pkg . --targets node18-win-x64 --output gerarFuncionarios.exe --icon assets/icon.ico"
-  },
+  "name": "gerador-funcionarios",
+  "version": "3.1.0",
+  "description": "Gerador de funcionários",
+  "main": "index.js",
+  "bin": "index.js",
   "pkg": {
-    "assets": [
-      "node_modules/canvas/build/Release/**/*",
-      "node_modules/canvas/**/*.{ttf,ttc,woff,woff2}"
-    ],
     "scripts": [
-      "node_modules/canvas/**/*.js"
-    ]
+      "src/**/*.js"
+    ],
+    "assets": [
+      "assets/**/*"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ],
+    "outputPath": "dist"
   },
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg . -o ./dist/gerador-funcionarios --compress GZip && npx rcedit ./dist/gerador-funcionarios.exe --set-icon ./assets/icon.ico"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.68",
-    "dotenv": "^16.4.7",
+    "@faker-js/faker": "^8.4.1",
+    "axios": "^1.7.2",
+    "readline": "^1.3.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "pkg": "^5.8.1"
-  },
-  "keywords": [
-    "funcionarios",
-    "excel",
-    "gerador"
-  ],
-  "author": "Douglas Silva",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dougllassillva27/Gerar-Funcionarios"
+    "pkg": "^5.8.1",
+    "rcedit": "^3.0.1"
   }
 }
